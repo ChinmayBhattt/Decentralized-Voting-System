@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Futuristic Decentralized Voting Banner - White Theme</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+  /* Reset and base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body, html {
+    height: 100%;
+    background: #f9fafc;
+    font-family: 'Orbitron', sans-serif;
+    color: #3a3d42;
+    overflow: hidden;
+  }
+
+  /* Banner container */
+  .banner {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 360px;
+    margin: 40px auto;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #ffffff 0%, #e6e9f0 100%);
+    box-shadow:
+      0 0 30px #a0a7b9,
+      inset 0 0 60px #d6dbeb;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  /* Background hexagons grid */
+  .hex-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at center, #e0e3ed 15%, transparent 70%),
+      repeating-conic-gradient(#c9cbd6 0deg 30deg, transparent 30deg 60deg),
+      repeating-conic-gradient(#d1d3de 0deg 30deg, transparent 30deg 60deg);
+    mask-image: radial-gradient(circle at center, rgba(0,0,0,0.3) 60%, transparent 85%);
+  }
+
+  /* Hexagons pattern with SVG for crispness */
+  svg.hexagon-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+  }
+
+  /* Blockchain nodes container */
+  .blockchain-network {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+    pointer-events: none;
+  }
+
+  /* Node style */
+  .node {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle at 10px 10px, #6c7dbd, #4452a6);
+    border-radius: 50%;
+    box-shadow:
+      0 0 12px #8a9ad1,
+      0 0 20px #5e6db2,
+      inset 0 1.5px 2px #b0bbd9;
+    filter: drop-shadow(0 0 6px #7d8cd3);
+    animation: pulseGlow 3s ease-in-out infinite alternate;
+  }
+  @keyframes pulseGlow {
+    0% { box-shadow: 0 0 8px #7d8cd3, 0 0 18px #5a68a4, inset 0 1.5px 2px #b0bbd9; }
+    100% { box-shadow: 0 0 18px #a6b1d8, 0 0 28px #7280bf, inset 0 2px 3px #d1d7ed;}
+  }
+
+  /* Glowing connection lines */
+  svg.connections {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+    overflow: visible;
+    pointer-events: none;
+    filter: drop-shadow(0 0 5px #7d8cd3);
+  }
+
+  /* Device icons and ballot */
+  .device {
+    position: absolute;
+    background: rgba(108, 125, 189, 0.15);
+    border-radius: 12px;
+    border: 1.5px solid #8c9dd9;
+    backdrop-filter: blur(8px);
+    box-shadow:
+      0 0 12px #7e89d4,
+      inset 0 0 12px #b3bbef;
+  }
+  .device.phone {
+    width: 80px;
+    height: 140px;
+    bottom: 32px;
+    left: 64px;
+    animation: floatUpDown 5s ease-in-out infinite;
+  }
+  .device.laptop {
+    width: 180px;
+    height: 100px;
+    bottom: 50px;
+    right: 72px;
+    animation: floatUpDown 6s ease-in-out infinite reverse;
+  }
+  @keyframes floatUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Phone screen & ballot */
+  .phone-screen {
+    width: 60px;
+    height: 110px;
+    margin: 12px auto;
+    background: rgba(150, 160, 210, 0.9);
+    border-radius: 10px;
+    box-shadow: inset 0 0 12px #7a89df;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Ballot inside phone */
+  .ballot {
+    width: 48px;
+    height: 60px;
+    background: linear-gradient(135deg, #8a98ff, #b0b9ff);
+    margin: 14px auto;
+    border-radius: 6px;
+    box-shadow: 0 0 15px #9dacff;
+    position: relative;
+  }
+  .ballot:before {
+    content: "";
+    position: absolute;
+    top: 10px; left: 8px;
+    width: 32px; height: 5px;
+    background: rgba(255 255 255 / 0.8);
+    border-radius: 2px;
+    box-shadow:
+      0 14px rgba(255 255 255 / 0.7),
+      0 28px rgba(255 255 255 / 0.7);
+  }
+  .ballot:after {
+    content: "";
+    position: absolute;
+    bottom: 10px; left: 8px;
+    width: 12px; height: 12px;
+    border: 2px solid #c9c6ff;
+    border-radius: 3px;
+    background: linear-gradient(135deg, #bec6ff, #d3dbff);
+  }
+
+  /* Laptop screen & ballot */
+  .laptop-screen {
+    position: relative;
+    width: 160px;
+    height: 80px;
+    margin: 8px auto 0;
+    background: rgba(130, 135, 195, 0.8);
+    border-radius: 8px 8px 0 0;
+    box-shadow: inset 0 0 15px #5970ce;
+  }
+  /* Laptop laptop base */
+  .laptop-base {
+    width: 180px;
+    height: 20px;
+    background: linear-gradient(135deg, #7d84c8, #bbc2f0);
+    border-radius: 0 0 12px 12px;
+    box-shadow: inset 0 3px 8px #95a2ea;
+  }
+  /* Ballot inside laptop screen */
+  .laptop-ballot {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    width: 120px;
+    height: 44px;
+    background: linear-gradient(135deg, #7f8fff, #aebaff);
+    border-radius: 8px;
+    box-shadow: 0 0 18px #b6bbff;
+  }
+  .laptop-ballot:before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 16px;
+    width: 88px;
+    height: 6px;
+    background: rgba(255 255 255 / 0.75);
+    border-radius: 3px;
+    box-shadow:
+      0 16px rgba(255 255 255 / 0.7);
+  }
+  .laptop-ballot:after {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    left: 16px;
+    width: 18px;
+    height: 18px;
+    border: 3px solid #c9caff;
+    border-radius: 4px;
+    box-shadow: inset 0 2px 5px #c0c7ff;
+    background: linear-gradient(135deg, #c2c9ff, #dbe0ff);
+  }
+
+  /* Holographic UI elements */
+  .holo-element {
+    position: absolute;
+    border-radius: 10px;
+    border: 1.8px solid #8d97ff;
+    box-shadow: 0 0 14px #989fff, inset 0 0 20px #bac2ff;
+    backdrop-filter: blur(6px);
+    animation: pulseHolo 3.5s ease-in-out infinite alternate;
+  }
+  @keyframes pulseHolo {
+    0% { box-shadow: 0 0 10px #9a9fff, inset 0 0 14px #a9b0ff; }
+    100% { box-shadow: 0 0 18px #b1b7ff, inset 0 0 32px #cbd2ff;}
+  }
+  .holo-element1 {
+    width: 140px;
+    height: 60px;
+    top: 48px;
+    right: 180px;
+    transform: skew(-10deg, 5deg);
+  }
+  .holo-element2 {
+    width: 100px;
+    height: 96px;
+    top: 130px;
+    left: 150px;
+    transform: skew(7deg, -3deg);
+  }
+  .holo-element3 {
+    width: 74px;
+    height: 24px;
+    top: 240px;
+    left: 430px;
+  }
+  .holo-element4 {
+    width: 80px;
+    height: 80px;
+    bottom: 28px;
+    left: 380px;
+    border-radius: 50%;
+    animation-duration: 4.3s;
+  }
+
+  /* Encrypted connection glow line */
+  .connection-line {
+    stroke: #7d8cd3;
+    stroke-width: 2;
+    filter: drop-shadow(0 0 6px #8d9bda);
+    stroke-linecap: round;
+    animation: flickerLine 4s infinite alternate;
+  }
+  @keyframes flickerLine {
+    0%, 100% { stroke-opacity: 1; }
+    50% { stroke-opacity: 0.7; }
+  }
+</style>
+</head>
+<body>
+  <div class="banner" aria-label="Futuristic decentralized voting system banner">
+
+    <div class="hex-grid"></div>
+
+    <svg class="hexagon-pattern" viewBox="0 0 1200 360" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <pattern id="hex" width="80" height="69.28" patternUnits="userSpaceOnUse" patternTransform="scale(1) translate(0,0)">
+          <polygon points="40 0 80 20 80 50 40 69.28 0 50 0 20" fill="none" stroke="#c3c3d6" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="360" fill="url(#hex)" />
+    </svg>
+
+    <div class="blockchain-network">
+      <!-- Nodes -->
+      <div class="node" style="top: 70px; left: 240px;"></div>
+      <div class="node" style="top: 160px; left: 300px;"></div>
+      <div class="node" style="top: 130px; left: 450px;"></div>
+      <div class="node" style="top: 240px; left: 520px;"></div>
+      <div class="node" style="top: 100px; left: 680px;"></div>
+      <div class="node" style="top: 180px; left: 720px;"></div>
+      <div class="node" style="top: 130px; left: 880px;"></div>
+      <div class="node" style="top: 230px; left: 920px;"></div>
+      <div class="node" style="top: 110px; left: 1050px;"></div>
+
+      <!-- Devices -->
+      <div class="device phone" aria-label="Phone device for voting">
+        <div class="phone-screen" aria-hidden="true">
+          <div class="ballot"></div>
+        </div>
+      </div>
+      <div class="device laptop" aria-label="Laptop device for voting">
+        <div class="laptop-screen" aria-hidden="true">
+          <div class="laptop-ballot"></div>
+        </div>
+        <div class="laptop-base" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <!-- SVG connections -->
+    <svg class="connections" aria-hidden="true" viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg" >
+      <!-- Lines connecting nodes -->
+      <line x1="252" y1="82" x2="312" y2="172" class="connection-line"/>
+      <line x1="312" y1="172" x2="462" y2="142" class="connection-line"/>
+      <line x1="462" y1="142" x2="532" y2="252" class="connection-line"/>
+      <line x1="532" y1="252" x2="692" y2="112" class="connection-line"/>
+      <line x1="692" y1="112" x2="732" y2="192" class="connection-line"/>
+      <line x1="732" y1="192" x2="892" y2="142" class="connection-line"/>
+      <line x1="892" y1="142" x2="932" y2="242" class="connection-line"/>
+      <line x1="932" y1="242" x2="1072" y2="122" class="connection-line"/>
+      <!-- Connections from devices to nodes to emphasize encrypted casting -->
+      <line x1="110" y1="180" x2="252" y2="82" class="connection-line"/>
+      <line x1="1060" y1="140" x2="1072" y2="122" class="connection-line"/>
+      <line x1="110" y1="180" x2="312" y2="172" class="connection-line"/>
+      <line x1="1060" y1="140" x2="892" y2="142" class="connection-line"/>
+    </svg>
+
+    <!-- Holographic UI elements -->
+    <div class="holo-element holo-element1" aria-hidden="true"></div>
+    <div class="holo-element holo-element2" aria-hidden="true"></div>
+    <div class="holo-element holo-element3" aria-hidden="true"></div>
+    <div class="holo-element holo-element4" aria-hidden="true"></div>
+
+  </div>
+</body>
+</html>
+
